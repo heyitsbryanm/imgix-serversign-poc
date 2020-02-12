@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css"
+    integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg=="
+    crossorigin="anonymous">
+  <title>Document</title>
+
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- js -->
+  <script src="js/imgix.min.js"></script>
+  <meta property="ix:host" content="assets.imgix.net">
+  <meta property="ix:useHttps" content="true">
+</head>
+
+<body>
+  <header class="grid-x grid-x-margin">
+    <div class="imgix-row">
+      <a id="logo" href="/create" class="ember-view active"> <img width="160" height="60" class="logo"
+          srcset="https://assets.imgix.net/presskit/imgix-presskit.pdf?page=4&amp;fm=png8&amp;w=160&amp;colorquant=100&amp;dpr=2 2x, https://assets.imgix.net/presskit/imgix-presskit.pdf?page=4&amp;fm=png8&amp;w=160&amp;colorquant=100 1x"
+          src="https://assets.imgix.net/presskit/imgix-presskit.pdf?page=4&amp;fm=png8&amp;w=160&amp;colorquant=100">
+        <span class="logo-text">
+          signing example
+        </span>
+      </a> </div>
+  </header>
+
+  <section class="grid-x grid-margin-x">
+    <div class="large-3 medium-3 small-3 cell">
+      <img
+        src="https://assets.imgix.net/unsplash/hotairballoon.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+    </div>
+
+    <div class="large-3 medium-3 small-3 cell">
+      <img src="https://assets.imgix.net/examples/blueberries.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+    </div>
+
+    <div class="large-3 medium-3 small-3 cell">
+      <img src="https://assets.imgix.net/examples/kingfisher.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+    </div>
+
+    <div class="large-3 medium-3 small-3 cell">
+      <img src="https://assets.imgix.net/examples/bluehat.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+    </div>
+  </section>
+</body>
+
+<script>
+
+  // build the list of images to sign
+  let images = document.querySelectorAll('img');
+  let reqBody = {urls: [], srcset: false}
+  for (let i = 0; i < images.length; i++) {
+    reqBody.urls.push(images[i].src)
+  }
+
+  // create the function for replacing images
+
+  // fetch options
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  let requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(reqBody)
+  };
+
+  // send request and replace new objects
+  fetch("http://localhost:3001/sign_images", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+
+      // replace all the existing images
+      console.log('result is: ', result)
+      let count = 0;
+      console.log((JSON.parse(result)[0]))
+      for(let i of images) {
+        i.src = JSON.parse(result).urls[count];
+        count += 1;
+      }
+    })
+    .catch(error => console.log('error', error));
+
+
+</script>
+
+</html>

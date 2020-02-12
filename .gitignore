@@ -1,0 +1,13 @@
+# packages and modules
+node_modules
+
+# sensitive files
+.env.development.local
+.env.development
+.env.local
+.env
+config.js
+
+# junk files
+junk*
+delete*

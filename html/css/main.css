@@ -1,0 +1,80 @@
+/*========== header ==========*/
+
+header {
+	background: #212b32;
+  text-align: center;
+  padding: 40px;
+}
+
+header a span.logo-text {
+	display: inline-block;
+	margin-top: 0;
+	margin-left: .25em;
+	font-size: 195%;
+	font-weight: 800;
+	vertical-align: middle;
+}
+
+header .imgix-row {
+	margin-left: auto;
+	margin-right: auto;
+}
+@media (min-width: 1000px) {
+	.imgix-row {
+		width: 760px;
+	}
+}
+
+.logo-text {
+	font-size: 180%;
+	font-weight: 900;
+	color: #2ecfff;
+	margin: -.2em 0 0;
+	text-indent: .01em;
+	text-transform: uppercase;
+}
+
+header .logo {
+	margin: 0;
+	display: inline-block;
+	padding: 0;
+	vertical-align: middle;
+}
+
+.logo {
+	border-left: none;
+}
+
+/*========== general ==========*/
+
+img {
+	max-width: 100%;
+}
+
+/*========== fonts ==========*/
+
+h3, section h1, section h2 {
+  color: #536d7f;
+  font-weight: 600;
+}
+
+section.imgix h2, section.imgix-examples h2 {
+  color: #536d7f;
+  font-weight: 400;
+  text-indent: .5%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  font-size: 150%;
+}
+
+section p {
+  color: #6695b9;
+  padding-left: .5em;
+  padding-right: .5em;
+  max-width: 34em;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.4;
+  font-size: 100%;
+}
