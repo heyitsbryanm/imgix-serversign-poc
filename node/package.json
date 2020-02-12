@@ -1,0 +1,20 @@
+{
+  "name": "imgix-signing-example",
+  "version": "1.0.0",
+  "description": "Serverside signing example using Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "heyitsbryanm",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "imgix-core-js": "^2.2.1",
+    "nodemon": "^2.0.2"
+  }
+}
