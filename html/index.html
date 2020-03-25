@@ -12,11 +12,9 @@
 
   <!-- stylesheet -->
   <link rel="stylesheet" href="css/main.css">
+  <script src="js/sendImages.js"></script>
 
-  <!-- js -->
-  <script src="js/imgix.min.js"></script>
-  <meta property="ix:host" content="assets.imgix.net">
-  <meta property="ix:useHttps" content="true">
+
 </head>
 
 <body>
@@ -30,64 +28,101 @@
         </span>
       </a> </div>
   </header>
+  <div class="fold">
+    <section class="grid-x margin-x page-width">
+      <div class="large-6 medium-6 small-12">
+        <h1 class="white">Serverside signing example</h1>
+        <h2 class="subtitle">This is a very basic method of signing images. All the images are signed in a server using
+          NodeJS, which is then used to replace the non-signed images on this HTML page.</h2>
+      </div>
+      <div class="large-6 medium-6"></div>
+    </section>
+  </div>
 
-  <section class="grid-x grid-margin-x">
+  <section class="grid-x grid-margin-x page-width">
+
+    <div class="large-12 medium-12 small-12 cell">
+      <div class="section_divider"></div>
+    </div>
+    <h1 class="large-12 medium-12 small-12 cell section_title">Image examples</h1>
+    <p class="large-12 medium-12 small-12 cell">Note that these images are signed using an invalid token, and that these images don't require a signature to work. To demo this properly, change your settings according to the instructions in the <a href="https://github.com/heyitsbryanm/imgix-serversign-poc">readme</a>.</p>
+
     <div class="large-3 medium-3 small-3 cell">
-      <img
+      <img class="imgExample"
         src="https://assets.imgix.net/unsplash/hotairballoon.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+      <div class="metadata">
+        <p><span class="bold">Original URL:</span> <a class="original"></a></p>
+        <p><span class="bold">New signed URL:</span> <a class="newUrl"></a></p>
+      </div>
     </div>
 
     <div class="large-3 medium-3 small-3 cell">
-      <img src="https://assets.imgix.net/examples/blueberries.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+      <img class="imgExample"
+        src="https://assets.imgix.net/examples/blueberries.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+      <div class="metadata">
+        <p><span class="bold">Original URL:</span> <a class="original"></a></p>
+        <p><span class="bold">New signed URL:</span> <a class="newUrl"></a></p>
+      </div>
     </div>
 
     <div class="large-3 medium-3 small-3 cell">
-      <img src="https://assets.imgix.net/examples/kingfisher.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+      <img class="imgExample"
+        src="https://assets.imgix.net/examples/kingfisher.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+      <div class="metadata">
+        <p><span class="bold">Original URL:</span> <a class="original"></a></p>
+        <p><span class="bold">New signed URL:</span> <a class="newUrl"></a></p>
+      </div>
     </div>
 
     <div class="large-3 medium-3 small-3 cell">
-      <img src="https://assets.imgix.net/examples/bluehat.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+      <img class="imgExample"
+        src="https://assets.imgix.net/examples/bluehat.jpg?w=500&amp;h=500&amp;fit=crop&amp;crop=right">
+      <div class="metadata">
+        <p><span class="bold">Original URL:</span> <a class="original"></a></p>
+        <p><span class="bold">New signed URL:</span> <a class="newUrl"></a></p>
+      </div>
     </div>
   </section>
 </body>
 
 <script>
+  // adds image URLs to the 
+  let imgExample = document.querySelectorAll('.imgExample');
+  let originalUrl = document.querySelectorAll('.original');
+  for (let i = 0; i < imgExample.length; i++) {
+    originalUrl[i].innerHTML = imgExample[i].src
+    originalUrl[i].href = imgExample[i].src
 
-  // build the list of images to sign
-  let images = document.querySelectorAll('img');
-  let reqBody = {urls: [], srcset: false}
-  for (let i = 0; i < images.length; i++) {
-    reqBody.urls.push(images[i].src)
   }
-
-  // create the function for replacing images
-
-  // fetch options
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  let requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: JSON.stringify(reqBody)
-  };
-
-  // send request and replace new objects
-  fetch("http://localhost:3001/sign_images", requestOptions)
-    .then(response => response.text())
-    .then(result => {
-
-      // replace all the existing images
-      console.log('result is: ', result)
-      let count = 0;
-      console.log((JSON.parse(result)[0]))
-      for(let i of images) {
-        i.src = JSON.parse(result).urls[count];
-        count += 1;
-      }
-    })
-    .catch(error => console.log('error', error));
-
-
 </script>
+
+<script>
+  (async () => {
+
+    // get the images from the server
+    var results = await sendImages();
+
+    // once we have the images, we can now replace the existing images in the HTML
+    let images = document.querySelectorAll('img');
+    let count = 0;
+    for (let i of images) {
+      i.src = JSON.parse(results).urls[count];
+      count += 1;
+    }
+
+    // for demo purposes, insert the image URLs underneath as metadata
+    let newUrl = document.querySelectorAll('.newUrl');
+    let resultsParsed = JSON.parse(results).urls
+    console.log('resultsParsed is: ', resultsParsed)
+    for (let i = 0; i < imgExample.length; i++) {
+      newUrl[i].innerHTML = resultsParsed[i];
+      newUrl[i].href = resultsParsed[i];
+    }
+
+    // log the results in the console
+    console.log('Received URLs:', resultsParsed)
+  })();
+</script>
+
 
 </html>

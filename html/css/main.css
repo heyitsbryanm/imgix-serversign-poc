@@ -1,16 +1,15 @@
 /*========== header ==========*/
 
 header {
-	background: #212b32;
-  text-align: center;
-  padding: 40px;
+	text-align: center;
+	padding: 40px;
 }
 
 header a span.logo-text {
 	display: inline-block;
 	margin-top: 0;
 	margin-left: .25em;
-	font-size: 195%;
+	font-size: 2em;
 	font-weight: 800;
 	vertical-align: middle;
 }
@@ -51,30 +50,103 @@ img {
 	max-width: 100%;
 }
 
+p {
+	color: #6686a0;
+}
+
+.bold {
+	font-weight: 700;
+}
+
+.white {
+	color: white;
+}
+
+@media print, screen and (min-width: 40em) {
+	.h1,
+	h1 {
+		font-size: 3.2rem;
+	}
+}
+
+div h1,
+div h2,
+div h3,
+div h4,
+div h5,
+div h6 {
+	color: #354b5a;
+	font-family: "Roboto Slab", sans-serif;
+	font-weight: 400;
+}
+
+.subtitle {
+	color: #6686a0;
+	font-size: 30px;
+	line-height: 40px;
+	margin-bottom: 66px;
+	width: 530px;
+}
+
+a {
+	line-height: inherit;
+	color: #1779ba;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+h1.section_title {
+	font-family: "Roboto Slab", sans-serif;
+}
+
+.section_divider {
+	background: #00c0fa;
+	margin-bottom: 13px;
+	height: 6px;
+	width: 94px;
+}
+
 /*========== fonts ==========*/
 
-h3, section h1, section h2 {
-  color: #536d7f;
-  font-weight: 600;
+h3,
+section h1,
+section h2 {
+	color: #536d7f;
 }
 
-section.imgix h2, section.imgix-examples h2 {
-  color: #536d7f;
-  font-weight: 400;
-  text-indent: .5%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  text-align: center;
-  font-size: 150%;
+section.imgix h2,
+section.imgix-examples h2 {
+	color: #536d7f;
+	font-weight: 400;
+	text-indent: .5%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 150%;
 }
 
-section p {
-  color: #6695b9;
-  padding-left: .5em;
-  padding-right: .5em;
-  max-width: 34em;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.4;
-  font-size: 100%;
+.metadata {
+	margin-top: 15px;
+}
+.metadata p {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-align: left;
+	margin-bottom: initial;
+}
+
+/*========== page ==========*/
+
+.page-width {
+	max-width: 1260px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	padding: 50px 0px;
+}
+
+.fold,
+header {
+	background: #22303a;
 }
