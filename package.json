@@ -1,7 +1,7 @@
 {
-  "name": "imgix-signing-example",
+  "name": "server-side-signing-proof-of-concept",
   "version": "1.0.0",
-  "description": "Serverside signing example using Node.js",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,6 +16,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "imgix-core-js": "^2.2.1",
-    "nodemon": "^2.0.2"
-  }
+    "nodemon": "^2.0.2",
+    "path": "0.12.7"
+  },
+  "keywords": []
 }
